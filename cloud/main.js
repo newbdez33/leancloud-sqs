@@ -21,3 +21,10 @@ AV.Cloud.afterSave("_User", function(request) {
   //   }
   //   });
 });
+
+AV.Cloud.beforeDelete("_User", function(request, response) {
+
+	//之前可以检查是否允许删除
+	//response.error("因为某些原因不能删除");
+	response.success();
+});
