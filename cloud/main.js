@@ -4,27 +4,41 @@ AV.Cloud.define("hello", function(request, response) {
   response.success("Hello from Jacky!");
 });
 
+
+var API_URL = "http://moodle.salmonapps.com/update.php";
+
+function callback_moodle(actionName, className, objectId, obj) {
+
+  var json = JSON.stringify(obj);
+
+  AV.Cloud.httpRequest({
+    method: 'POST',
+    url: API_URL,
+    body: {
+      action: actionName,
+      className: className,
+      data: json
+    },
+    success: function(httpResponse) {
+      console.log(httpResponse.text);
+    },
+    error: function(httpResponse) {
+      console.error('Request failed with response code ' + httpResponse.status);
+    }
+  });
+
+}
+
 //用户钩子
 AV.Cloud.afterUpdate("_User", function(request) {
-   console.log("Updated _user:" + JSON.stringify(request.object));
+  callback_moodle("UPDATE", "_USER", request.object);
 });
 
 AV.Cloud.afterSave("_User", function(request) {
-  console.log(request.object);
-  // request.object.set("from","LeanCloud");
-  // request.object.save(null,{success:function(user)
-  //   {
-  //     console.log("ok!");
-  //   },error:function(user,error)
-  //   {
-  //     console.log("error",error);
-  //   }
-  //   });
+  callback_moodle("ADD", "_USER", request.object);
 });
 
 AV.Cloud.beforeDelete("_User", function(request, response) {
-
-	//之前可以检查是否允许删除
-	//response.error("因为某些原因不能删除");
+  callback_moodle("DELETE", "_USER", request.object);
 	response.success();
 });
