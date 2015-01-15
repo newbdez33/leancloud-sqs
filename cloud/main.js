@@ -10,7 +10,6 @@ var API_URL = "http://moodle.salmonapps.com/update.php";
 function callback_moodle(actionName, className, obj) {
 
   var jsonData = JSON.stringify(obj);
-  console.log(jsonData);
   AV.Cloud.httpRequest({
     method: 'POST',
     url: API_URL,
@@ -83,7 +82,6 @@ AV.Cloud.afterSave("Assignment", function(request) {
   callback_moodle("ADD", "Assignment", request.object);
 });
 
-AV.Cloud.beforeDelete("Assignment", function(request, response) {
+AV.Cloud.afterDelete("Assignment", function(request) {
   callback_moodle("DELETE", "Assignment", request.object);
-  response.success();
 });
