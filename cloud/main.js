@@ -83,5 +83,6 @@ AV.Cloud.afterSave("Assignment", function(request) {
 });
 
 AV.Cloud.afterDelete("Assignment", function(request) {
+  console.log("after delete called"+request);
   callback_moodle("DELETE", "Assignment", request.object);
 });
