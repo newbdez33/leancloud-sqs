@@ -20,7 +20,7 @@ function callback_moodle(actionName, className, objectId, obj) {
     body: {
       action: actionName,
       className: className,
-      data: obj
+      data: json
     },
     success: function(httpResponse) {
       console.log(httpResponse.text);
