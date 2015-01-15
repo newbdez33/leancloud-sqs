@@ -14,10 +14,13 @@ function callback_moodle(actionName, className, objectId, obj) {
   AV.Cloud.httpRequest({
     method: 'POST',
     url: API_URL,
+    headers: {
+    'Content-Type': 'application/json'
+    },
     body: {
       action: actionName,
       className: className,
-      data: json
+      data: obj
     },
     success: function(httpResponse) {
       console.log(httpResponse.text);
