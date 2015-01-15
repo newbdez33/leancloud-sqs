@@ -7,10 +7,10 @@ AV.Cloud.define("hello", function(request, response) {
 
 var API_URL = "http://moodle.salmonapps.com/update.php";
 
-function callback_moodle(actionName, className, objectId, obj) {
+function callback_moodle(actionName, className, obj) {
 
-  var json = JSON.stringify(obj);
-
+  var jsonData = JSON.stringify(obj);
+  console.log(jsonData);
   AV.Cloud.httpRequest({
     method: 'POST',
     url: API_URL,
@@ -20,7 +20,7 @@ function callback_moodle(actionName, className, objectId, obj) {
     body: {
       action: actionName,
       className: className,
-      data: json
+      data: jsonData
     },
     success: function(httpResponse) {
       console.log(httpResponse.text);
