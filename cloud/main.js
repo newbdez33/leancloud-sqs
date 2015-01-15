@@ -45,3 +45,45 @@ AV.Cloud.beforeDelete("_User", function(request, response) {
   callback_moodle("DELETE", "_USER", request.object);
 	response.success();
 });
+
+//通知钩子
+AV.Cloud.afterUpdate("Notification", function(request) {
+  callback_moodle("UPDATE", "Notification", request.object);
+});
+
+AV.Cloud.afterSave("Notification", function(request) {
+  callback_moodle("ADD", "Notification", request.object);
+});
+
+AV.Cloud.beforeDelete("Notification", function(request, response) {
+  callback_moodle("DELETE", "Notification", request.object);
+  response.success();
+});
+
+//通知回复钩子
+AV.Cloud.afterUpdate("NotificationReply", function(request) {
+  callback_moodle("UPDATE", "NotificationReply", request.object);
+});
+
+AV.Cloud.afterSave("NotificationReply", function(request) {
+  callback_moodle("ADD", "NotificationReply", request.object);
+});
+
+AV.Cloud.beforeDelete("NotificationReply", function(request, response) {
+  callback_moodle("DELETE", "NotificationReply", request.object);
+  response.success();
+});
+
+//作业钩子
+AV.Cloud.afterUpdate("Assignment", function(request) {
+  callback_moodle("UPDATE", "Assignment", request.object);
+});
+
+AV.Cloud.afterSave("Assignment", function(request) {
+  callback_moodle("ADD", "Assignment", request.object);
+});
+
+AV.Cloud.beforeDelete("Assignment", function(request, response) {
+  callback_moodle("DELETE", "Assignment", request.object);
+  response.success();
+});
