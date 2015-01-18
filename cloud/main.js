@@ -17,7 +17,7 @@ function callback_moodle(actionName, className, obj) {
     headers: {
     'Content-Type': 'application/json'
     },
-    body: jsonData,
+    body: obj,
     success: function(httpResponse) {
       console.log(httpResponse.text);
     },
