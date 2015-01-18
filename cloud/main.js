@@ -12,9 +12,6 @@ function callback_moodle(actionName, className, obj) {
   AV.Cloud.httpRequest({
     method: 'POST',
     url: API_URL,
-    headers: {
-    'Content-Type': 'application/json'
-    },
     body: {
       data: obj,
       action: actionName,
