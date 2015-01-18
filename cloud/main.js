@@ -9,6 +9,8 @@ var API_URL = "http://moodle.salmonapps.com/update.php";
 
 function callback_moodle(actionName, className, obj) {
 
+  console.log(obj.toJSON());
+
   AV.Cloud.httpRequest({
     method: 'POST',
     url: API_URL,
