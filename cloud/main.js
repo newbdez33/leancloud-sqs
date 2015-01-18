@@ -17,6 +17,10 @@ function callback_moodle(actionName, className, obj) {
       action: actionName,
       className: className
     },
+    headers: {
+      'Content-Type': 'application/json',
+      "charset": "utf-8"
+    },
     success: function(httpResponse) {
       console.log(httpResponse.text);
     },
