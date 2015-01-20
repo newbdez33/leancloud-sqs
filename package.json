@@ -1,0 +1,9 @@
+{
+    "name": "moodle-sync",
+    "description": "Moodle Syncing.",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "request": "2.x"
+    }
+}

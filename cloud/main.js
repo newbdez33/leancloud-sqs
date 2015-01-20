@@ -4,32 +4,47 @@ AV.Cloud.define("hello", function(request, response) {
   response.success("Hello from Jacky!");
 });
 
+var request = require('request');
+
 
 var API_URL = "http://moodle.salmonapps.com/update.php";
 
 function callback_moodle(actionName, className, obj) {
 
-  console.log(obj.toJSON());
+	//console.log(obj.toJSON());
+	var postData = {
+		data: obj,
+		action: actionName,
+		className: className
+	};
+	request({
+		method: 'POST',
+		uri: API_URL,
+		multipart:[{'Content-Type':'application/json', body:JSON.stringify(postData)}]
+	}, function(error, response, body){
+		console.log(error+":"+response+":"+body);
+	});
 
-  AV.Cloud.httpRequest({
-    method: 'POST',
-    url: API_URL,
-    body: {
-      data: obj,
-      action: actionName,
-      className: className
-    },
-    headers: {
-      'Content-Type': 'application/json',
-      "charset": "utf-8"
-    },
-    success: function(httpResponse) {
-      console.log(httpResponse.text);
-    },
-    error: function(httpResponse) {
-      console.error('Request failed with response code ' + httpResponse.status);
-    }
-  });
+
+  // AV.Cloud.httpRequest({
+  //   method: 'POST',
+  //   url: API_URL,
+  //   body: {
+  //     data: obj,
+  //     action: actionName,
+  //     className: className
+  //   },
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     "charset": "utf-8"
+  //   },
+  //   success: function(httpResponse) {
+  //     console.log(httpResponse.text);
+  //   },
+  //   error: function(httpResponse) {
+  //     console.error('Request failed with response code ' + httpResponse.status);
+  //   }
+  // });
 
 }
 
