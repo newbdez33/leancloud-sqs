@@ -16,11 +16,11 @@ function callback_moodle(actionName, className, obj) {
 		action: actionName,
 		className: className
 	};
-  console.log(postData.toJSON());
+  console.log(postData);
 	request({
 		method: 'POST',
 		uri: API_URL,
-		multipart:[{'Content-Type':'application/json', body:JSON.stringify(postData)}]
+    json:postData
 	}, function(error, response, body){
 		console.log(error+":"+response+":"+body);
 	});
@@ -57,7 +57,7 @@ AV.Cloud.afterSave("_User", function(request) {
   callback_moodle("ADD", "_USER", request.object);
 });
 
-AV.Cloud.afterDelete("_User", function(request, response) {
+AV.Cloud.beforeDelete("_User", function(request, response) {
   callback_moodle("DELETE", "_USER", request.object);
 	response.success();
 });
@@ -71,7 +71,7 @@ AV.Cloud.afterSave("Notification", function(request) {
   callback_moodle("ADD", "Notification", request.object);
 });
 
-AV.Cloud.afterDelete("Notification", function(request, response) {
+AV.Cloud.beforeDelete("Notification", function(request, response) {
   callback_moodle("DELETE", "Notification", request.object);
   response.success();
 });
@@ -85,7 +85,7 @@ AV.Cloud.afterSave("NotificationReply", function(request) {
   callback_moodle("ADD", "NotificationReply", request.object);
 });
 
-AV.Cloud.afterDelete("NotificationReply", function(request, response) {
+AV.Cloud.beforeDelete("NotificationReply", function(request, response) {
   callback_moodle("DELETE", "NotificationReply", request.object);
   response.success();
 });
@@ -99,7 +99,8 @@ AV.Cloud.afterSave("Assignment", function(request) {
   callback_moodle("ADD", "Assignment", request.object);
 });
 
-AV.Cloud.afterDelete("Assignment", function(request, response) {
+AV.Cloud.beforeDelete("Assignment", function(request, response) {
   console.log("after delete called"+request);
   callback_moodle("DELETE", "Assignment", request.object);
+  response.success();
 });
