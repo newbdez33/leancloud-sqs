@@ -104,3 +104,18 @@ AV.Cloud.beforeDelete("Assignment", function(request, response) {
   callback_moodle("DELETE", "Assignment", request.object);
   response.success();
 });
+
+//表现钩子
+AV.Cloud.afterUpdate("Rating", function(request) {
+  callback_moodle("UPDATE", "Rating", request.object);
+});
+
+AV.Cloud.afterSave("Rating", function(request) {
+  callback_moodle("ADD", "Rating", request.object);
+});
+
+AV.Cloud.beforeDelete("Rating", function(request, response) {
+  console.log("after delete called"+request);
+  callback_moodle("DELETE", "Rating", request.object);
+  response.success();
+});
