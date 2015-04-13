@@ -7,7 +7,7 @@ AV.Cloud.define("hello", function(request, response) {
 var request = require('request');
 
 
-var API_URL = "http://moodle.salmonapps.com/update.php";
+var API_URL = "http://182.92.189.221/update.php";
 
 function callback_moodle(actionName, className, obj) {
 
